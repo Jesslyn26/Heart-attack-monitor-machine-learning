@@ -1,5 +1,7 @@
 from flask import Flask, request, jsonify
+import numpy as np
 import tensorflow as tf
+
 
 app = Flask(__name__)
 
@@ -10,7 +12,7 @@ def receive_data():
     data = request.get_json()
     print("Received data:", data)
 
-    x_val = [data[' HR'], data[' SpO2']]
+    x_val = np.array([data[' HR'], data[' SpO2']])
     y_test_pred = model.predict(x_val)
     y_test_pred = (y_test_pred > 0.5).astype(int)
     # Process the received data
@@ -24,4 +26,5 @@ def receive_data():
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)
+
 
