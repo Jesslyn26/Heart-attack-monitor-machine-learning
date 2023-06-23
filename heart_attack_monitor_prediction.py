@@ -10,7 +10,7 @@ def receive_data():
     data = request.get_json()
     print("Received data:", data)
 
-    x_val = [data[' PULSE'], data[' SpO2']]
+    x_val = [data[' HR'], data[' SpO2']]
     y_test_pred = model.predict(x_val)
     y_test_pred = (y_test_pred > 0.5).astype(int)
     # Process the received data
